@@ -1,4 +1,6 @@
 import DynamicTable from "@/components/DataTable";
+import Button from "@/lib/button/Button";
+import Loader from "@/lib/loader/Loader";
 
 export default function Home() {
   const columns = [
@@ -110,10 +112,41 @@ export default function Home() {
 
   return (
     <div className="p-6">
-      <h1 className="text-4xl font-bold mb-4 text-gray-800">
+      <h1 className="mb-4 text-4xl font-bold text-gray-800">
         Dynamic Data Table with Selectable Rows
       </h1>
       <DynamicTable columns={columns} rows={rows} pagination pageSize={4} />
+      <div className="flex flex-wrap items-end gap-6">
+        <Loader size={48} classNames="text-muted-300 dark:text-muted-100" />
+        <Loader size={48} classNames="text-primary-500" />
+        <Loader size={48} classNames="text-success-500" />
+        <Loader size={48} classNames="text-danger-500" />
+        <Loader size={48} classNames="text-yellow-400" />
+        <Loader size={48} classNames="text-violet-500" />
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Button variant="solid" color="default">
+          Button
+        </Button>
+        <Button variant="solid" color="contrast">
+          Button
+        </Button>
+        <Button variant="solid" color="primary">
+          Button
+        </Button>
+        <Button variant="solid" color="info">
+          Button
+        </Button>
+        <Button variant="solid" color="success">
+          Button
+        </Button>
+        <Button variant="solid" color="warning">
+          Button
+        </Button>
+        <Button variant="solid" color="danger">
+          Button
+        </Button>
+      </div>
     </div>
   );
 }

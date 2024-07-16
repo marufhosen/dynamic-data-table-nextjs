@@ -1,0 +1,113 @@
+[data-tooltip]::before,
+[data-tooltip]::after {
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    z-index: -100;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:focus::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    z-index: 100; 
+}
+
+
+/*== pointer tip ==*/
+[data-tooltip]::before {
+    border-style: solid;
+    border-width: 1em 0.75em 0 0.75em;
+    border-color: #3E474F transparent transparent transparent;
+    bottom: 100%;
+    content: "";
+    top: -2em;
+    margin-left: -0.5em;
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+    transform:  scale(.6) translateY(-90%);
+} 
+
+[data-tooltip]:hover::before,
+[data-tooltip]:focus::before {
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+}
+
+
+/*== speech bubble ==*/
+[data-tooltip]::after {
+    background: #3E474F;
+    border-radius: .25em;
+    bottom: 180%;
+    color: #EDEFF0;
+    content: attr(data-tooltip-content);
+    margin-left: -8.75em;
+    padding: 1em;
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+    transform:  scale(.6) translateY(50%);  
+    width: 17.5em;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after  {
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+}
+
+@media (max-width: 760px) {
+  [data-tooltip]::after { 
+        font-size: .75em;
+        margin-left: -5em;
+        width: 10em; 
+  }
+}
+
+
+.tooltip {
+  --tooltip-spacing: 2.5rem;
+  @apply font-sans text-xs flex justify-center items-center bg-muted-800 dark:bg-primary-800 rounded-md whitespace-nowrap z-[1000] absolute p-2;
+}
+
+.tooltip-wrapper {
+  @apply relative flex justify-center items-center;
+}
+
+.tooltip::before {
+  @apply content-[''] border-solid border-transparent border-[5px] border-muted-800 dark:border-primary-800 absolute pointer-events-none rotate-45 z-[-1] w-[0] h-[0];
+}
+
+.tooltip-content {
+  @apply text-white text-xs;
+}
+
+.tooltip.tooltip-top {
+  @apply top-[calc(var(--tooltip-spacing,_44px)_*_-1)]
+}
+
+.tooltip.tooltip-top::before {
+  @apply bottom-[-4px] start-1/2 ms-[-4px];
+}
+
+.tooltip.tooltip-end {
+  @apply top-1/2 -translate-y-1/2 start-[calc(100%_+_0.75rem)];
+}
+
+.tooltip.tooltip-end::before {
+  @apply ms-[-4px] start-0 top-[calc(50%_-_5px)];
+}
+
+.tooltip.tooltip-bottom {
+  @apply bottom-[calc(var(--tooltip-spacing,_50px)_*_-1)]
+}
+
+.tooltip.tooltip-bottom::before {
+  @apply top-[-4px] start-1/2 ms-[-4px];
+}
+
+.tooltip.tooltip-start {
+  @apply top-1/2 -translate-y-1/2 end-[calc(100%_+_0.75rem)];
+}
+
+.tooltip.tooltip-start::before {
+  @apply me-[-4px] end-0 top-[calc(50%_-_5px)];
+}
